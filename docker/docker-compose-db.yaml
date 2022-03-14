@@ -1,0 +1,34 @@
+version: '3'
+services:
+  db:
+    container_name: kasm_db
+    image: postgres:9.5-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    networks:
+      - kasm_default_network
+    environment:
+      POSTGRES_PASSWORD: changeme
+      POSTGRES_USER: kasmapp
+      POSTGRES_DB: kasm
+    volumes:
+      - /opt/kasm/1.9.0/conf/database/data.sql:/docker-entrypoint-initdb.d/data.sql
+      - /opt/kasm/1.9.0/conf/database/:/tmp/
+      - /opt/kasm/1.9.0/certs/db_server.crt:/etc/ssl/certs/db_server.crt
+      - /opt/kasm/1.9.0/certs/db_server.key:/etc/ssl/certs/db_server.key
+      - kasm_db_1.9.0:/var/lib/postgresql/data
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "20"
+    command: postgres -c ssl=on -c ssl_cert_file=/etc/ssl/certs/db_server.crt -c ssl_key_file=/etc/ssl/certs/db_server.key
+volumes:
+  kasm_db_1.9.0:
+    external: true
+networks:
+  kasm_default_network:
+    external: true
+
