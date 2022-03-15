@@ -17,3 +17,5 @@
     -  - Configure the API to route the traffice over tor circuts
     -  - Changeing all docker yaml's
     -  - Change nginx configuration (rout all traffic thruogh tor)
+    -  - Customize all docker images
+    
