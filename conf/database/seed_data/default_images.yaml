@@ -203,7 +203,7 @@
 #     add_to_all_users_group: true
 #     categories: '["Games"]'
 #     enabled: false
-    Doom:
+    Maltego:
     description: 'Maltego.'
     docker_registry: https://index.docker.io/v1/
     name: kasmweb/maltego:1.10.0-rolling
